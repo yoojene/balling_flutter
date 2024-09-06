@@ -1,0 +1,94 @@
+{
+  "equipment": [
+    {
+      "idEquipment": "995",
+      "idTeam": "134865",
+      "date": "2018-08-14 19:38:01",
+      "strSeason": "2018-2019",
+      "strEquipment": "https://www.thesportsdb.com/images/media/team/equipment/2018-134865-Jersey.png",
+      "strType": "1st",
+      "strUsername": "Ovokx"
+    },
+    {
+      "idEquipment": "6079",
+      "idTeam": "134865",
+      "date": "2022-06-17 11:00:21",
+      "strSeason": "2019-2020",
+      "strEquipment": "https://www.thesportsdb.com/images/media/team/equipment/ku87931655460013.png",
+      "strType": "4th",
+      "strUsername": "Ovokx"
+    },
+    {
+      "idEquipment": "6080",
+      "idTeam": "134865",
+      "date": "2022-06-17 11:02:12",
+      "strSeason": "2019-2020",
+      "strEquipment": "https://www.thesportsdb.com/images/media/team/equipment/ldv7vg1655460126.png",
+      "strType": "3rd",
+      "strUsername": "Ovokx"
+    },
+    {
+      "idEquipment": "6081",
+      "idTeam": "134865",
+      "date": "2022-06-17 11:04:10",
+      "strSeason": "2020-2021",
+      "strEquipment": "https://www.thesportsdb.com/images/media/team/equipment/dqg6yz1655460245.png",
+      "strType": "2nd",
+      "strUsername": "Ovokx"
+    },
+    {
+      "idEquipment": "6082",
+      "idTeam": "134865",
+      "date": "2022-06-17 11:05:55",
+      "strSeason": "2021-2022",
+      "strEquipment": "https://www.thesportsdb.com/images/media/team/equipment/czbsbq1655460351.png",
+      "strType": "2nd",
+      "strUsername": "Ovokx"
+    },
+    {
+      "idEquipment": "6083",
+      "idTeam": "134865",
+      "date": "2022-06-17 11:07:08",
+      "strSeason": "2021-2022",
+      "strEquipment": "https://www.thesportsdb.com/images/media/team/equipment/takjim1655460424.png",
+      "strType": "4th",
+      "strUsername": "Ovokx"
+    },
+    {
+      "idEquipment": "6084",
+      "idTeam": "134865",
+      "date": "2022-06-17 11:08:00",
+      "strSeason": "2021-2022",
+      "strEquipment": "https://www.thesportsdb.com/images/media/team/equipment/3oupdi1655460476.png",
+      "strType": "5th",
+      "strUsername": "Ovokx"
+    },
+    {
+      "idEquipment": "6085",
+      "idTeam": "134865",
+      "date": "2022-06-17 11:08:50",
+      "strSeason": "2019-2020",
+      "strEquipment": "https://www.thesportsdb.com/images/media/team/equipment/wgcdge1655460521.png",
+      "strType": "1st",
+      "strUsername": "Ovokx"
+    },
+    {
+      "idEquipment": "6086",
+      "idTeam": "134865",
+      "date": "2022-06-17 11:10:24",
+      "strSeason": "2021-2022",
+      "strEquipment": "https://www.thesportsdb.com/images/media/team/equipment/7bne9y1655460615.png",
+      "strType": "3rd",
+      "strUsername": "Ovokx"
+    },
+    {
+      "idEquipment": "7905",
+      "idTeam": "134865",
+      "date": "2023-11-03 17:13:49",
+      "strSeason": "2023-2024",
+      "strEquipment": "https://www.thesportsdb.com/images/media/team/equipment/vpvm5y1699031623.png",
+      "strType": "4th",
+      "strUsername": "Ovokx"
+    }
+  ]
+}
