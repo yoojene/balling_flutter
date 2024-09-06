@@ -19,21 +19,6 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Balling with Flutter',
         theme: ThemeData(
-          // This is the theme of your application.
-          //
-          // TRY THIS: Try running your application with "flutter run". You'll see
-          // the application has a purple toolbar. Then, without quitting the app,
-          // try changing the seedColor in the colorScheme below to Colors.green
-          // and then invoke "hot reload" (save your changes or press the "hot
-          // reload" button in a Flutter-supported IDE, or press "r" if you used
-          // the command line to start the app).
-          //
-          // Notice that the counter didn't reset back to zero; the application
-          // state is not lost during the reload. To reset the state, use hot
-          // restart instead.
-          //
-          // This works for code too, not just values: Most code changes can be
-          // tested with just a hot reload.
           colorScheme: ColorScheme.fromSeed(
               seedColor: const Color.fromRGBO(29, 66, 138, 1)),
           // seedColor: const Color.fromRGBO(200, 16, 46, 0.5)),
@@ -48,7 +33,7 @@ class MyApp extends StatelessWidget {
 class BallingAppState extends ChangeNotifier {
   int currentPageIndex = 0;
 
-  var title = 'test';
+  var title = 'Home'; // Default title
 
   void changePage(int index) {
     currentPageIndex = index;
@@ -57,7 +42,6 @@ class BallingAppState extends ChangeNotifier {
         title = 'Home';
       case 1:
         title = 'Favourites';
-
       case 2:
         title = 'Schedule';
     }
@@ -68,17 +52,6 @@ class BallingAppState extends ChangeNotifier {
 class BallingApp extends StatefulWidget {
   const BallingApp({super.key});
 
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title = "Get Ballin'!";
-
   @override
   State<BallingApp> createState() => _BallingAppState();
 }
@@ -88,16 +61,9 @@ class _BallingAppState extends State<BallingApp> {
   Widget build(BuildContext context) {
     var appState = context.watch<BallingAppState>();
 
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-
     return Scaffold(
       bottomNavigationBar: NavigationBar(
-        destinations: const [
+        destinations: [
           NavigationDestination(
               selectedIcon: Icon(Icons.search),
               icon: Icon(Icons.search),
@@ -105,7 +71,7 @@ class _BallingAppState extends State<BallingApp> {
           NavigationDestination(
               icon: Icon(Icons.favorite), label: 'Favourites'),
           NavigationDestination(
-              icon: Icon(Icons.calendar_month), label: 'Schedule')
+              icon: Icon(Icons.calendar_month), label: 'Schedules')
         ],
         selectedIndex: appState.currentPageIndex,
         onDestinationSelected: (index) => appState.changePage(index),
