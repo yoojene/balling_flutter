@@ -10,20 +10,48 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List _foundItems = []; // Update the list view with these
+  List listItems = []; // All items from the API
+  SegmentType segment = SegmentType.players;
+  final TextEditingController _controller = TextEditingController();
+
   @override
   void initState() {
     super.initState();
     // Called once when the widget is created
-
     readJson(type: segment.name).then((value) => {
           setState(() {
             listItems = value;
+            _foundItems = listItems;
           })
         });
   }
 
-  List listItems = [];
-  SegmentType segment = SegmentType.players;
+  // https://www.youtube.com/watch?v=pUV5v240po0
+  void _filterItems(String searchTerm) {
+    List results = [];
+    if (searchTerm.isEmpty) {
+      results = listItems;
+    } else {
+      if (segment == SegmentType.players) {
+        results = listItems
+            .where((item) => item['strPlayer']
+                .toLowerCase()
+                .contains(searchTerm.toLowerCase()))
+            .toList();
+      } else {
+        results = listItems
+            .where((item) => item['strTeam']
+                .toLowerCase()
+                .contains(searchTerm.toLowerCase()))
+            .toList();
+      }
+    }
+
+    setState(() {
+      _foundItems = results;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,32 +60,23 @@ class _HomePageState extends State<HomePage> {
         Row(mainAxisAlignment: MainAxisAlignment.start, children: [
           Expanded(
               child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: SearchBar(
-                hintText: 'Search',
-                onChanged: (value) => {
-                      print(value),
-                      setState(() {
-                        listItems = listItems.where((item) {
-                          if (item['strPlayer'] != null) {
-                            return item['strPlayer']
-                                .toLowerCase()
-                                .contains(value.toLowerCase());
-                          } else {
-                            return item['strTeam']
-                                .toLowerCase()
-                                .contains(value.toLowerCase());
-                          }
-
-                          // else if (item['strTeam']
-                          //     .toLowerCase()
-                          //     .contains(value.toLowerCase())) return item;
-                        }).toList();
-
-                        print(listItems);
-                      })
-                    }),
-          )),
+                  padding: const EdgeInsets.all(8.0),
+                  child: SearchBar(
+                    controller: _controller,
+                    hintText: 'Search',
+                    onChanged: (value) => _filterItems(value),
+                    leading: Icon(Icons.search),
+                    trailing: <Widget>[
+                      IconButton(
+                          onPressed: () {
+                            setState(() {
+                              _foundItems = listItems;
+                            });
+                            _controller.clear();
+                          },
+                          icon: Icon(Icons.clear))
+                    ],
+                  ))),
         ]),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -86,6 +105,7 @@ class _HomePageState extends State<HomePage> {
                     readJson(type: segment.name).then((value) => {
                           setState(() {
                             listItems = value;
+                            _foundItems = listItems;
                           })
                         });
                   });
@@ -93,26 +113,26 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         Expanded(
-          child: ListView(
-              children: ListTile.divideTiles(context: context, tiles: [
-            if (listItems.isNotEmpty)
-              for (var item in listItems)
-                ListTile(
-                  leading: CircleAvatar(
-                    backgroundImage: NetworkImage(segment == SegmentType.players
-                        ? item['strCutout']
-                        : item['strBadge']),
-                  ),
-                  title: Text(segment == SegmentType.players
-                      ? item['strPlayer']
-                      : item['strTeam']),
-                  subtitle: Text(segment == SegmentType.players
-                      ? item['strPosition'] + '\n' + item['strNumber']
-                      : item['strTeamShort']),
-                  trailing: Icon(Icons.chevron_right),
-                ),
-          ]).toList()),
-        )
+            child: ListView.separated(
+          itemCount: _foundItems.length,
+          itemBuilder: (context, index) => ListTile(
+            leading: CircleAvatar(
+              backgroundImage: NetworkImage(segment == SegmentType.players
+                  ? _foundItems[index]['strCutout']
+                  : _foundItems[index]['strBadge']),
+            ),
+            title: Text(segment == SegmentType.players
+                ? _foundItems[index]['strPlayer']
+                : _foundItems[index]['strTeam']),
+            subtitle: Text(segment == SegmentType.players
+                ? _foundItems[index]['strPosition'] +
+                    '\n' +
+                    _foundItems[index]['strNumber']
+                : _foundItems[index]['strTeamShort']),
+            trailing: Icon(Icons.chevron_right),
+          ),
+          separatorBuilder: (context, index) => Divider(),
+        ))
       ],
     );
   }
