@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     // Called once when the widget is created
 
-    readJson(type: 'players').then((value) => {
+    readJson(type: segment.name).then((value) => {
           setState(() {
             listItems = value;
           })
@@ -29,19 +29,28 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Expanded(
-                child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SearchBar(
+        Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+          Expanded(
+              child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: SearchBar(
                 hintText: 'Search',
-                onChanged: (value) => (print(listItems)),
-              ),
-            ))
-          ],
-        ),
+                onChanged: (value) => {
+                      print(value),
+                      setState(() {
+                        listItems = listItems.where((item) {
+                          return item['strPlayer']
+                              .toLowerCase()
+                              .contains(value.toLowerCase());
+                          // else if (item['strTeam']
+                          //     .toLowerCase()
+                          //     .contains(value.toLowerCase())) return item;
+                        }).toList();
+                        print(listItems);
+                      })
+                    }),
+          )),
+        ]),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -65,21 +74,36 @@ class _HomePageState extends State<HomePage> {
                     // selected at one time, so its value is always the first
                     // item in the selected set.
                     segment = selection.first;
+
+                    readJson(type: segment.name).then((value) => {
+                          setState(() {
+                            listItems = value;
+                          })
+                        });
                   });
                 }),
           ],
         ),
         Expanded(
           child: ListView(
-            children: [
-              if (listItems.isNotEmpty)
-                for (var item in listItems)
-                  ListTile(
-                    title: Text(item['strPlayer']),
-                    // subtitle: Text(user['password']),
-                  )
-            ],
-          ),
+              children: ListTile.divideTiles(context: context, tiles: [
+            if (listItems.isNotEmpty)
+              for (var item in listItems)
+                ListTile(
+                  leading: CircleAvatar(
+                    backgroundImage: NetworkImage(segment == SegmentType.players
+                        ? item['strCutout']
+                        : item['strBadge']),
+                  ),
+                  title: Text(segment == SegmentType.players
+                      ? item['strPlayer']
+                      : item['strTeam']),
+                  subtitle: Text(segment == SegmentType.players
+                      ? item['strPosition'] + '\n' + item['strNumber']
+                      : item['strTeamShort']),
+                  trailing: Icon(Icons.chevron_right),
+                ),
+          ]).toList()),
         )
       ],
     );
