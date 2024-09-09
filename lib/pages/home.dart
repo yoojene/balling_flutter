@@ -39,13 +39,21 @@ class _HomePageState extends State<HomePage> {
                       print(value),
                       setState(() {
                         listItems = listItems.where((item) {
-                          return item['strPlayer']
-                              .toLowerCase()
-                              .contains(value.toLowerCase());
+                          if (item['strPlayer'] != null) {
+                            return item['strPlayer']
+                                .toLowerCase()
+                                .contains(value.toLowerCase());
+                          } else {
+                            return item['strTeam']
+                                .toLowerCase()
+                                .contains(value.toLowerCase());
+                          }
+
                           // else if (item['strTeam']
                           //     .toLowerCase()
                           //     .contains(value.toLowerCase())) return item;
                         }).toList();
+
                         print(listItems);
                       })
                     }),
