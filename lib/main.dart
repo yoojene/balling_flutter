@@ -1,6 +1,8 @@
 import 'package:balling/pages/favourites.dart';
 import 'package:balling/pages/home.dart';
+import 'package:balling/pages/player.dart';
 import 'package:balling/pages/schedule.dart';
+import 'package:balling/pages/teams.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,13 +20,18 @@ class MyApp extends StatelessWidget {
       create: (context) => BallingAppState(),
       child: MaterialApp(
         title: 'Balling with Flutter',
+        initialRoute: '/',
+        routes: {
+          BallingApp.routeName: (context) => const BallingApp(),
+          PlayerDetail.routeName: (context) => const PlayerDetail(),
+          TeamDetail.routeName: (context) => const TeamDetail(),
+        },
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
               seedColor: const Color.fromRGBO(29, 66, 138, 1)),
           // seedColor: const Color.fromRGBO(200, 16, 46, 0.5)),
           useMaterial3: true,
         ),
-        home: const BallingApp(),
       ),
     );
   }
@@ -52,6 +59,8 @@ class BallingAppState extends ChangeNotifier {
 class BallingApp extends StatefulWidget {
   const BallingApp({super.key});
 
+  static const routeName = '/';
+
   @override
   State<BallingApp> createState() => _BallingAppState();
 }
@@ -76,14 +85,8 @@ class _BallingAppState extends State<BallingApp> {
         selectedIndex: appState.currentPageIndex,
         onDestinationSelected: (index) => appState.changePage(index),
       ),
-
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
         backgroundColor: Theme.of(context).colorScheme.primaryFixedDim,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
         title: Text(appState.title),
       ),
       body: [
@@ -91,12 +94,6 @@ class _BallingAppState extends State<BallingApp> {
         FavouritesPage(),
         SchedulePage()
       ][appState.currentPageIndex],
-
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _incrementCounter,
-      //   tooltip: 'Increment',
-      //   child: const Icon(Icons.add),
-      // ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

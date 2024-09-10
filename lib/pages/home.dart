@@ -1,3 +1,5 @@
+import 'package:balling/pages/player.dart';
+import 'package:balling/pages/teams.dart';
 import 'package:flutter/material.dart';
 import 'package:balling/services/api.dart';
 
@@ -102,12 +104,14 @@ class _HomePageState extends State<HomePage> {
                     // item in the selected set.
                     segment = selection.first;
 
+                    _controller.clear();
                     readJson(type: segment.name).then((value) => {
                           setState(() {
                             listItems = value;
                             _foundItems = listItems;
                           })
                         });
+                    print(_foundItems);
                   });
                 }),
           ],
@@ -130,6 +134,24 @@ class _HomePageState extends State<HomePage> {
                     _foundItems[index]['strNumber']
                 : _foundItems[index]['strTeamShort']),
             trailing: Icon(Icons.chevron_right),
+            onTap: () => {
+              segment == SegmentType.players
+                  ? Navigator.pushNamed(context, PlayerDetail.routeName,
+                      arguments: PlayerDetailParams(
+                          _foundItems[index]['strPlayer'],
+                          _foundItems[index]['strNumber'],
+                          _foundItems[index]['strCutout'],
+                          _foundItems[index]['strPosition'],
+                          _foundItems[index]['strDescriptionEN']))
+                  : Navigator.pushNamed(context, TeamDetail.routeName,
+                      arguments: TeamDetailParams(
+                          _foundItems[index]['strTeam'],
+                          _foundItems[index]['strBadge'],
+                          _foundItems[index]['strTeamShort'],
+                          _foundItems[index]['strStadium'],
+                          _foundItems[index]['strLocation'],
+                          _foundItems[index]['strDescriptionEN']))
+            },
           ),
           separatorBuilder: (context, index) => Divider(),
         ))
