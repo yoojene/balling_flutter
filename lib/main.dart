@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         routes: {
           BallingApp.routeName: (context) => const BallingApp(),
-          PlayerDetail.routeName: (context) => const PlayerDetail(),
+          PlayerDetail.routeName: (context) => PlayerDetail(),
           TeamDetail.routeName: (context) => const TeamDetail(),
         },
         theme: ThemeData(
@@ -52,6 +52,19 @@ class BallingAppState extends ChangeNotifier {
       case 2:
         title = 'Schedule';
     }
+    notifyListeners();
+  }
+
+  var favourites = <dynamic>[];
+
+  void toggleFavorite(dynamic item) {
+    if (favourites.contains(item)) {
+      favourites.remove(item);
+    } else {
+      favourites.add(item);
+    }
+
+    print(favourites);
     notifyListeners();
   }
 }

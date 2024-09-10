@@ -1,6 +1,11 @@
+import 'package:balling/main.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../models/teams.dart';
 
 class PlayerDetailParams {
+  // final Players player;
   final String strPlayer;
   final String strNumber;
   final String strCutout;
@@ -11,20 +16,12 @@ class PlayerDetailParams {
       this.strPosition, this.strDescriptionEN);
 }
 
-class PlayerDetail extends StatefulWidget {
-  const PlayerDetail({super.key});
-
+class PlayerDetail extends StatelessWidget {
   static const routeName = '/player';
-
-  @override
-  State<PlayerDetail> createState() => _PlayerDetailState();
-}
-
-class _PlayerDetailState extends State<PlayerDetail> {
-  bool isSelected = false; // temp state
-
   @override
   Widget build(BuildContext context) {
+    var appState = context.watch<BallingAppState>();
+
     final args =
         ModalRoute.of(context)!.settings.arguments as PlayerDetailParams;
 
@@ -44,13 +41,13 @@ class _PlayerDetailState extends State<PlayerDetail> {
                   children: [
                     IconButton(
                         selectedIcon: Icon(Icons.favorite),
-                        isSelected: isSelected,
+                        isSelected:
+                            appState.favourites.contains(args.strPlayer),
                         style: ButtonStyle(
                             backgroundColor: WidgetStatePropertyAll(
                                 Theme.of(context).colorScheme.primaryFixedDim)),
-                        onPressed: () => setState(() {
-                              isSelected = !isSelected;
-                            }),
+                        onPressed: () =>
+                            appState.toggleFavorite(args.strPlayer),
                         icon: Icon(Icons.favorite_outline)),
                     Image.network(args.strCutout),
                     SizedBox(height: 10),
@@ -66,7 +63,6 @@ class _PlayerDetailState extends State<PlayerDetail> {
                           fontWeight: FontWeight.normal,
                         )),
                     SizedBox(height: 10),
-
                     Text('Position',
                         style: TextStyle(
                           fontSize: 18,
