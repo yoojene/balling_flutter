@@ -146,6 +146,7 @@ class _HomePageState extends State<HomePage> {
                           _foundItems[index]['strDescriptionEN']))
                   : Navigator.pushNamed(context, TeamDetail.routeName,
                       arguments: TeamDetailParams(
+                          _foundItems[index]['idTeam'],
                           _foundItems[index]['strTeam'],
                           _foundItems[index]['strBadge'],
                           _foundItems[index]['strTeamShort'],

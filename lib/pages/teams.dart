@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class TeamDetailParams {
+  final String idTeam;
   final String strTeam;
   final String strBadge;
   final String strTeamShort;
@@ -11,7 +12,7 @@ class TeamDetailParams {
   final String strLocation;
   final String strDescriptionEN;
 
-  TeamDetailParams(this.strTeam, this.strBadge, this.strTeamShort,
+  TeamDetailParams(this.idTeam, this.strTeam, this.strBadge, this.strTeamShort,
       this.strStadium, this.strLocation, this.strDescriptionEN);
 }
 
@@ -25,6 +26,7 @@ class TeamDetail extends StatelessWidget {
     final args = ModalRoute.of(context)!.settings.arguments as TeamDetailParams;
 
     var team = Teams(
+      args.idTeam,
       args.strTeam,
       args.strTeamShort,
       args.strStadium,
@@ -50,7 +52,7 @@ class TeamDetail extends StatelessWidget {
                     IconButton(
                         selectedIcon: Icon(Icons.favorite),
                         isSelected:
-                            appState.favouriteTeamNames.contains(team.strTeam),
+                            appState.favouriteTeamIds.contains(team.idTeam),
                         style: ButtonStyle(
                             backgroundColor: WidgetStatePropertyAll(
                                 Theme.of(context).colorScheme.primaryFixedDim)),

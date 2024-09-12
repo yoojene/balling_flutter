@@ -72,14 +72,14 @@ class BallingAppState extends ChangeNotifier {
   }
 
   late List<Teams> favouriteTeams = [];
-  late List<String> favouriteTeamNames = [];
+  late List<String> favouriteTeamIds = [];
 
   void toggleFavoriteTeam(Teams team) {
-    if (favouriteTeamNames.contains(team.strTeam)) {
-      favouriteTeamNames.remove(team.strTeam);
-      favouriteTeams.removeWhere((t) => t.strTeam == team.strTeam);
+    if (favouriteTeamIds.contains(team.idTeam)) {
+      favouriteTeamIds.remove(team.idTeam);
+      favouriteTeams.removeWhere((t) => t.idTeam == team.idTeam);
     } else {
-      favouriteTeamNames.add(team.strTeam);
+      favouriteTeamIds.add(team.idTeam);
       favouriteTeams.add(team);
     }
     notifyListeners();

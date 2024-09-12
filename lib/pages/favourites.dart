@@ -12,7 +12,7 @@ class FavouritesPage extends StatelessWidget {
     var favouritePlayers = appState.favouritePlayers;
     var favouritePlayerIds = appState.favouritePlayerIds;
 
-    var favouriteTeamNames = appState.favouriteTeamNames;
+    var favouriteTeamIds = appState.favouriteTeamIds;
     var favouriteTeams = appState.favouriteTeams;
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -60,7 +60,7 @@ class FavouritesPage extends StatelessWidget {
         SizedBox(height: 20),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: favouriteTeamNames.isNotEmpty
+          child: favouriteTeamIds.isNotEmpty
               ? Text(
                   'Favourite Teams',
                   style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
