@@ -1,5 +1,5 @@
 import 'package:balling/main.dart';
-import 'package:balling/models/teams.dart';
+import 'package:balling/models/team.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,7 +10,7 @@ class TeamDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     var appState = context.watch<BallingAppState>();
 
-    final team = ModalRoute.of(context)!.settings.arguments as Teams;
+    final team = ModalRoute.of(context)!.settings.arguments as Team;
 
     return Scaffold(
       appBar: AppBar(

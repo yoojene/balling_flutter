@@ -1,4 +1,4 @@
-class Players {
+class Player {
   final String idPlayer;
   final String strPlayer;
   final String strNumber;
@@ -6,6 +6,6 @@ class Players {
   final String strPosition;
   final String strDescriptionEN;
 
-  Players(this.idPlayer, this.strPlayer, this.strNumber, this.strCutout,
+  Player(this.idPlayer, this.strPlayer, this.strNumber, this.strCutout,
       this.strPosition, this.strDescriptionEN);
 }

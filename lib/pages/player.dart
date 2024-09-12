@@ -1,5 +1,5 @@
 import 'package:balling/main.dart';
-import 'package:balling/models/players.dart';
+import 'package:balling/models/player.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -9,7 +9,7 @@ class PlayerDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     var appState = context.watch<BallingAppState>();
 
-    final player = ModalRoute.of(context)!.settings.arguments as Players;
+    final player = ModalRoute.of(context)!.settings.arguments as Player;
 
     return Scaffold(
       appBar: AppBar(
@@ -83,5 +83,3 @@ class PlayerDetail extends StatelessWidget {
     );
   }
 }
-
-class Player {}

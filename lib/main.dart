@@ -1,10 +1,10 @@
-import 'package:balling/models/players.dart';
-import 'package:balling/models/teams.dart';
+import 'package:balling/models/player.dart';
+import 'package:balling/models/team.dart';
 import 'package:balling/pages/favourites.dart';
 import 'package:balling/pages/home.dart';
 import 'package:balling/pages/player.dart';
 import 'package:balling/pages/schedule.dart';
-import 'package:balling/pages/teams.dart';
+import 'package:balling/pages/team.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -57,10 +57,10 @@ class BallingAppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  late List<Players> favouritePlayers = [];
+  late List<Player> favouritePlayers = [];
   late List<String> favouritePlayerIds = [];
 
-  void toggleFavoritePlayer(Players player) {
+  void toggleFavoritePlayer(Player player) {
     if (favouritePlayerIds.contains(player.idPlayer)) {
       favouritePlayerIds.remove(player.idPlayer);
       favouritePlayers.removeWhere((p) => p.idPlayer == player.idPlayer);
@@ -71,10 +71,10 @@ class BallingAppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  late List<Teams> favouriteTeams = [];
+  late List<Team> favouriteTeams = [];
   late List<String> favouriteTeamIds = [];
 
-  void toggleFavoriteTeam(Teams team) {
+  void toggleFavoriteTeam(Team team) {
     if (favouriteTeamIds.contains(team.idTeam)) {
       favouriteTeamIds.remove(team.idTeam);
       favouriteTeams.removeWhere((t) => t.idTeam == team.idTeam);

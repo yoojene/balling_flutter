@@ -1,4 +1,4 @@
-class Teams {
+class Team {
   final String idTeam;
   final String strTeam;
   final String strTeamShort;
@@ -7,6 +7,6 @@ class Teams {
   final String strDescriptionEN;
   final String strBadge;
 
-  Teams(this.idTeam, this.strTeam, this.strTeamShort, this.strStadium,
+  Team(this.idTeam, this.strTeam, this.strTeamShort, this.strStadium,
       this.strLocation, this.strDescriptionEN, this.strBadge);
 }
