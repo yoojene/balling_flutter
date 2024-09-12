@@ -1,4 +1,7 @@
+import 'package:balling/main.dart';
+import 'package:balling/models/teams.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class TeamDetailParams {
   final String strTeam;
@@ -12,20 +15,23 @@ class TeamDetailParams {
       this.strStadium, this.strLocation, this.strDescriptionEN);
 }
 
-class TeamDetail extends StatefulWidget {
-  const TeamDetail({super.key});
-
+class TeamDetail extends StatelessWidget {
   static const routeName = '/team';
 
   @override
-  State<TeamDetail> createState() => _TeamDetailState();
-}
-
-class _TeamDetailState extends State<TeamDetail> {
-  bool isSelected = false; // temp state
-  @override
   Widget build(BuildContext context) {
+    var appState = context.watch<BallingAppState>();
+
     final args = ModalRoute.of(context)!.settings.arguments as TeamDetailParams;
+
+    var team = Teams(
+      args.strTeam,
+      args.strTeamShort,
+      args.strStadium,
+      args.strLocation,
+      args.strDescriptionEN,
+      args.strBadge,
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -43,13 +49,12 @@ class _TeamDetailState extends State<TeamDetail> {
                   children: [
                     IconButton(
                         selectedIcon: Icon(Icons.favorite),
-                        isSelected: isSelected,
+                        isSelected:
+                            appState.favouriteTeamNames.contains(team.strTeam),
                         style: ButtonStyle(
                             backgroundColor: WidgetStatePropertyAll(
                                 Theme.of(context).colorScheme.primaryFixedDim)),
-                        onPressed: () => setState(() {
-                              isSelected = !isSelected;
-                            }),
+                        onPressed: () => appState.toggleFavoriteTeam(team),
                         icon: Icon(Icons.favorite_outline)),
                     Image.network(args.strBadge),
                     SizedBox(height: 10),

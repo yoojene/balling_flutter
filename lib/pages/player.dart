@@ -1,19 +1,18 @@
 import 'package:balling/main.dart';
+import 'package:balling/models/players.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../models/teams.dart';
-
 class PlayerDetailParams {
-  // final Players player;
+  final String idPlayer; // final Players ;
   final String strPlayer;
   final String strNumber;
   final String strCutout;
   final String strPosition;
   final String strDescriptionEN;
 
-  PlayerDetailParams(this.strPlayer, this.strNumber, this.strCutout,
-      this.strPosition, this.strDescriptionEN);
+  PlayerDetailParams(this.idPlayer, this.strPlayer, this.strNumber,
+      this.strCutout, this.strPosition, this.strDescriptionEN);
 }
 
 class PlayerDetail extends StatelessWidget {
@@ -24,6 +23,14 @@ class PlayerDetail extends StatelessWidget {
 
     final args =
         ModalRoute.of(context)!.settings.arguments as PlayerDetailParams;
+
+    var player = Players(
+      args.idPlayer,
+      args.strPlayer,
+      args.strNumber,
+      args.strCutout,
+      args.strPosition,
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -41,13 +48,12 @@ class PlayerDetail extends StatelessWidget {
                   children: [
                     IconButton(
                         selectedIcon: Icon(Icons.favorite),
-                        isSelected:
-                            appState.favourites.contains(args.strPlayer),
+                        isSelected: appState.favouritePlayerIds
+                            .contains(player.idPlayer),
                         style: ButtonStyle(
                             backgroundColor: WidgetStatePropertyAll(
                                 Theme.of(context).colorScheme.primaryFixedDim)),
-                        onPressed: () =>
-                            appState.toggleFavorite(args.strPlayer),
+                        onPressed: () => appState.toggleFavoritePlayer(player),
                         icon: Icon(Icons.favorite_outline)),
                     Image.network(args.strCutout),
                     SizedBox(height: 10),
@@ -98,3 +104,5 @@ class PlayerDetail extends StatelessWidget {
     );
   }
 }
+
+class Player {}

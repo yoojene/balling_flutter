@@ -138,6 +138,7 @@ class _HomePageState extends State<HomePage> {
               segment == SegmentType.players
                   ? Navigator.pushNamed(context, PlayerDetail.routeName,
                       arguments: PlayerDetailParams(
+                          _foundItems[index]['idPlayer'],
                           _foundItems[index]['strPlayer'],
                           _foundItems[index]['strNumber'],
                           _foundItems[index]['strCutout'],

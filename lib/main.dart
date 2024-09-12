@@ -1,3 +1,5 @@
+import 'package:balling/models/players.dart';
+import 'package:balling/models/teams.dart';
 import 'package:balling/pages/favourites.dart';
 import 'package:balling/pages/home.dart';
 import 'package:balling/pages/player.dart';
@@ -24,7 +26,7 @@ class MyApp extends StatelessWidget {
         routes: {
           BallingApp.routeName: (context) => const BallingApp(),
           PlayerDetail.routeName: (context) => PlayerDetail(),
-          TeamDetail.routeName: (context) => const TeamDetail(),
+          TeamDetail.routeName: (context) => TeamDetail(),
         },
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(
@@ -55,16 +57,31 @@ class BallingAppState extends ChangeNotifier {
     notifyListeners();
   }
 
-  var favourites = <dynamic>[];
+  late List<Players> favouritePlayers = [];
+  late List<String> favouritePlayerIds = [];
 
-  void toggleFavorite(dynamic item) {
-    if (favourites.contains(item)) {
-      favourites.remove(item);
+  void toggleFavoritePlayer(Players player) {
+    if (favouritePlayerIds.contains(player.idPlayer)) {
+      favouritePlayerIds.remove(player.idPlayer);
+      favouritePlayers.removeWhere((p) => p.idPlayer == player.idPlayer);
     } else {
-      favourites.add(item);
+      favouritePlayerIds.add(player.idPlayer);
+      favouritePlayers.add(player);
     }
+    notifyListeners();
+  }
 
-    print(favourites);
+  late List<Teams> favouriteTeams = [];
+  late List<String> favouriteTeamNames = [];
+
+  void toggleFavoriteTeam(Teams team) {
+    if (favouriteTeamNames.contains(team.strTeam)) {
+      favouriteTeamNames.remove(team.strTeam);
+      favouriteTeams.removeWhere((t) => t.strTeam == team.strTeam);
+    } else {
+      favouriteTeamNames.add(team.strTeam);
+      favouriteTeams.add(team);
+    }
     notifyListeners();
   }
 }
