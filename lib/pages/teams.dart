@@ -3,19 +3,6 @@ import 'package:balling/models/teams.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class TeamDetailParams {
-  final String idTeam;
-  final String strTeam;
-  final String strBadge;
-  final String strTeamShort;
-  final String strStadium;
-  final String strLocation;
-  final String strDescriptionEN;
-
-  TeamDetailParams(this.idTeam, this.strTeam, this.strBadge, this.strTeamShort,
-      this.strStadium, this.strLocation, this.strDescriptionEN);
-}
-
 class TeamDetail extends StatelessWidget {
   static const routeName = '/team';
 
@@ -23,22 +10,12 @@ class TeamDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     var appState = context.watch<BallingAppState>();
 
-    final args = ModalRoute.of(context)!.settings.arguments as TeamDetailParams;
-
-    var team = Teams(
-      args.idTeam,
-      args.strTeam,
-      args.strTeamShort,
-      args.strStadium,
-      args.strLocation,
-      args.strDescriptionEN,
-      args.strBadge,
-    );
+    final team = ModalRoute.of(context)!.settings.arguments as Teams;
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primaryFixedDim,
-        title: Text(args.strTeam),
+        title: Text(team.strTeam),
       ),
       body: ListView(
         children: [
@@ -58,7 +35,7 @@ class TeamDetail extends StatelessWidget {
                                 Theme.of(context).colorScheme.primaryFixedDim)),
                         onPressed: () => appState.toggleFavoriteTeam(team),
                         icon: Icon(Icons.favorite_outline)),
-                    Image.network(args.strBadge),
+                    Image.network(team.strBadge),
                     SizedBox(height: 10),
                     Text('Team Acronym',
                         style: TextStyle(
@@ -66,7 +43,7 @@ class TeamDetail extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         )),
                     SizedBox(height: 10),
-                    Text(args.strTeamShort,
+                    Text(team.strTeamShort,
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.normal,
@@ -80,7 +57,7 @@ class TeamDetail extends StatelessWidget {
                         )),
                     SizedBox(height: 10),
 
-                    Text('${args.strStadium}  ${args.strLocation}',
+                    Text('${team.strStadium}  ${team.strLocation}',
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.normal,
@@ -94,7 +71,7 @@ class TeamDetail extends StatelessWidget {
                         )),
                     SizedBox(height: 10),
 
-                    Text(args.strDescriptionEN,
+                    Text(team.strDescriptionEN,
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.normal,

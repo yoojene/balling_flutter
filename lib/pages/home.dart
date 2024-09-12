@@ -1,4 +1,5 @@
 import 'package:balling/models/players.dart';
+import 'package:balling/models/teams.dart';
 import 'package:balling/pages/player.dart';
 import 'package:balling/pages/teams.dart';
 import 'package:flutter/material.dart';
@@ -146,14 +147,15 @@ class _HomePageState extends State<HomePage> {
                           _foundItems[index]['strPosition'],
                           _foundItems[index]['strDescriptionEN']))
                   : Navigator.pushNamed(context, TeamDetail.routeName,
-                      arguments: TeamDetailParams(
-                          _foundItems[index]['idTeam'],
-                          _foundItems[index]['strTeam'],
-                          _foundItems[index]['strBadge'],
-                          _foundItems[index]['strTeamShort'],
-                          _foundItems[index]['strStadium'],
-                          _foundItems[index]['strLocation'],
-                          _foundItems[index]['strDescriptionEN']))
+                      arguments: Teams(
+                        _foundItems[index]['idTeam'],
+                        _foundItems[index]['strTeam'],
+                        _foundItems[index]['strTeamShort'],
+                        _foundItems[index]['strStadium'],
+                        _foundItems[index]['strLocation'],
+                        _foundItems[index]['strDescriptionEN'],
+                        _foundItems[index]['strBadge'],
+                      ))
             },
           ),
           separatorBuilder: (context, index) => Divider(),
