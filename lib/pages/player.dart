@@ -3,39 +3,18 @@ import 'package:balling/models/players.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class PlayerDetailParams {
-  final String idPlayer; // final Players ;
-  final String strPlayer;
-  final String strNumber;
-  final String strCutout;
-  final String strPosition;
-  final String strDescriptionEN;
-
-  PlayerDetailParams(this.idPlayer, this.strPlayer, this.strNumber,
-      this.strCutout, this.strPosition, this.strDescriptionEN);
-}
-
 class PlayerDetail extends StatelessWidget {
   static const routeName = '/player';
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<BallingAppState>();
 
-    final args =
-        ModalRoute.of(context)!.settings.arguments as PlayerDetailParams;
-
-    var player = Players(
-      args.idPlayer,
-      args.strPlayer,
-      args.strNumber,
-      args.strCutout,
-      args.strPosition,
-    );
+    final player = ModalRoute.of(context)!.settings.arguments as Players;
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primaryFixedDim,
-        title: Text(args.strPlayer),
+        title: Text(player.strPlayer),
       ),
       body: ListView(
         children: [
@@ -55,7 +34,7 @@ class PlayerDetail extends StatelessWidget {
                                 Theme.of(context).colorScheme.primaryFixedDim)),
                         onPressed: () => appState.toggleFavoritePlayer(player),
                         icon: Icon(Icons.favorite_outline)),
-                    Image.network(args.strCutout),
+                    Image.network(player.strCutout),
                     SizedBox(height: 10),
                     Text('Number',
                         style: TextStyle(
@@ -63,7 +42,7 @@ class PlayerDetail extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         )),
                     SizedBox(height: 10),
-                    Text(args.strNumber,
+                    Text(player.strNumber,
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.normal,
@@ -76,7 +55,7 @@ class PlayerDetail extends StatelessWidget {
                         )),
                     SizedBox(height: 10),
 
-                    Text(args.strPosition,
+                    Text(player.strPosition,
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.normal,
@@ -90,7 +69,7 @@ class PlayerDetail extends StatelessWidget {
                         )),
                     SizedBox(height: 10),
 
-                    Text(args.strDescriptionEN,
+                    Text(player.strDescriptionEN,
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.normal,

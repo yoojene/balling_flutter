@@ -1,3 +1,4 @@
+import 'package:balling/models/players.dart';
 import 'package:balling/pages/player.dart';
 import 'package:balling/pages/teams.dart';
 import 'package:flutter/material.dart';
@@ -137,7 +138,7 @@ class _HomePageState extends State<HomePage> {
             onTap: () => {
               segment == SegmentType.players
                   ? Navigator.pushNamed(context, PlayerDetail.routeName,
-                      arguments: PlayerDetailParams(
+                      arguments: Players(
                           _foundItems[index]['idPlayer'],
                           _foundItems[index]['strPlayer'],
                           _foundItems[index]['strNumber'],

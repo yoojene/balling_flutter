@@ -4,7 +4,8 @@ class Players {
   final String strNumber;
   final String strCutout;
   final String strPosition;
+  final String strDescriptionEN;
 
   Players(this.idPlayer, this.strPlayer, this.strNumber, this.strCutout,
-      this.strPosition);
+      this.strPosition, this.strDescriptionEN);
 }
