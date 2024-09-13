@@ -32,6 +32,9 @@ class _SchedulePageState extends State<SchedulePage> {
             padding: const EdgeInsets.only(left: 8.0, right: 8.0, top: 8.0),
             child: Card(
                 elevation: 20,
+                color: event['intHomeScore'] != null
+                    ? Colors.white
+                    : Colors.grey[200],
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
