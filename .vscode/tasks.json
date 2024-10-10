@@ -12,7 +12,7 @@
     {
       "label": "Flutter-Launch-iOS",
       "type": "shell",
-      "command": "flutter run -d 914DFF78-C716-481C-A2EA-F89A739E311B "
+      "command": "flutter run -d FE84D68B-C24C-4F87-9F46-5074D0E94FE2"
     },
     {
       "label": "Flutter-Launch-Android",
